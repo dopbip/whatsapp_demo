@@ -1,4 +1,4 @@
-const port = 3300;
+const port = process.env.PORT || 3001;
 const express = require('express');
 
 let indexRoutes = require('./routes/index.js');
