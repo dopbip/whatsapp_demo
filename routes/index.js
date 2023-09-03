@@ -26,7 +26,7 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
 
 
         if (data?.isMessage) {
-            console.log(`The msg recieved is : ${incomingMessage}`)
+            console.log(`The msg recieved is : ${JSON.stringify(incomingMessage, undefined, 2)}`)
         }
 
         return res.sendStatus(200);
