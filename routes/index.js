@@ -3,7 +3,7 @@ const router = require('express').Router();
 const WhatsappCloudAPI = require('whatsappcloudapi_wrapper');
 
 const MetaConfig = {
-    accessToken: 'EAACnqNygr3EBO7yeDVWMKtfdi6HoUJUtaZAPNOrn8MFSeSm9hsHQWHEZC1iaQNIycBQhRirS7EnZBJvGuPrHTsxRsVyUF0pDGmEg77xGkZCyXgwZAS58WQTcZCsB9OopVdHJEZBBFSi3ZBl33ZCR2KBdtsxKrO50Mjl45mG7J05VWIttLkjvt398nZA5X4CXVZB2qVTI3R1ZCcMhp8gdEa7IiQfNwvfK8RwZD',
+    accessToken: 'EAACnqNygr3EBO3037yRy2DuiZCWQpZADQ53WInihCD5t1SqfBUYLydMjJZAJZBwTmK8rHZAVkB0o7ZCAT9oAJfe5lXCTU2VpD76zd8rXSZB1gJQQMJ3BcqdJEJdJ85qqHDu9GI3gRQZAxMjJDQEzeuJp6K9LIC0ZA5sZAZBDdDDTJp3nlp2HO7y9u78z9ljczT6QwCX4DRlibJINuy1IF1vQcwVjU3EWYYZD',
     senderPhoneNumberId: '118618771205644',
     WABA_ID: '118416884561172',
     graphAPIVersion: 'v17.0.',
