@@ -1,6 +1,7 @@
 'use strict';
 const router = require('express').Router();
 const WhatsappCloudAPI = require('whatsappcloudapi_wrapper');
+const { SessionsClient } = require('dialogflow');
 
 const MetaConfig = {
     accessToken: 'EAACnqNygr3EBO3037yRy2DuiZCWQpZADQ53WInihCD5t1SqfBUYLydMjJZAJZBwTmK8rHZAVkB0o7ZCAT9oAJfe5lXCTU2VpD76zd8rXSZB1gJQQMJ3BcqdJEJdJ85qqHDu9GI3gRQZAxMjJDQEzeuJp6K9LIC0ZA5sZAZBDdDDTJp3nlp2HO7y9u78z9ljczT6QwCX4DRlibJINuy1IF1vQcwVjU3EWYYZD',
