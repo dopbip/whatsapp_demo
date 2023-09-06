@@ -29,6 +29,49 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
 
         if (data?.isMessage) {
             console.log(`The msg recieved is : ${JSON.stringify(incomingMessage, undefined, 2)}`)
+            let chatTextt = incomingMessage.text.body
+
+             // Send the message to Dialogflow for processing
+             let dialogflowResponse = await dialogflowRequest(chatTextt, recipientPhone)
+
+             // Extract the response from Dialogflow and send it back to Whatsapp
+             let fulfillmentText = dialogflowResponse.fulfillmentText
+             let action = dialogflowResponse.action
+             let parameters = dialogflowResponse.parameters
+             console.log(JSON.stringify(dialogflowResponse, undefined, 2))
+
+             //Actions cases 
+             switch (action) {
+                case 'input.unknown':
+                    
+                    break;
+                case 'input.welcome':
+                    await Whatsapp.sendSimpleButtons({
+                                message: `Hey ${recipientName}, am AI chatbot and am here to assist you! \nPlease choose from the following:`,
+                                recipientPhone: recipientPhone, 
+                                listOfButtons: [
+                                    {
+                                        title: '👙 Women',
+                                        id: 'women_category',
+                                    },
+                                    {
+                                        title: '🩲 Men',
+                                        id: 'men_category',
+                                    },
+                                    // {
+                                    //     title: 'Speak to a human',
+                                    //     id: 'speak_to_human',
+                                    // },
+                                ],
+                            });
+                    break;
+                default:
+                    break;
+             }
+
+        } else if (!data?.isMessage) {
+            console.log(`*** is not isMessage debug ***`)
+            console.log(JSON.stringify(data, undefined, 2))
         }
 
         return res.sendStatus(200);
