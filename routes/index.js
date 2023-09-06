@@ -7,7 +7,7 @@ const MetaConfig = {
     accessToken: 'EAACnqNygr3EBOyxkEBesm2XnX9egxmTqPgWGXnkBwkdI6ZC74nbefCBAh8W1HLeV3TyS813WrGD1yb8hZBgB6oGAW4Eu1tC1CVyPglrd8GkhCZCa2mp6siOqC2xrfU302KlrMXV2YxlWof6pU7aYs3cS0oymd7ZC2foPbhZA17rLxZB061GkeEWtwPGBIJ2ZBvFUnacixj74geWJJRYYSeTBjhKFaQZD',
     senderPhoneNumberId: '118618771205644',
     WABA_ID: '118416884561172',
-    graphAPIVersion: 'v17.0.',
+    graphAPIVersion: 'v13.0.',
     Meta_WA_VerifyToken:'happy_panda_in_space'
 };
 
