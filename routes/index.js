@@ -74,10 +74,10 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
             });
 
         } 
-        // else if (!data?.isMessage) {
-        //     console.log(`*** is not isMessage debug ***`)
-        //     console.log(JSON.stringify(data, undefined, 2))
-        // }
+        else if (!data?.isMessage) {
+            console.log(`*** is not isMessage debug ***`)
+            console.log(JSON.stringify(data, undefined, 2))
+        }
 
         return res.sendStatus(200);
     } catch (error) {
