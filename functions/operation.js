@@ -10,6 +10,7 @@ const config = {
       client_email: credentials.client_email
     }
   };
+  console.log(JSON.stringify(config, undefined, 2))
 
 let dialogflowRequest = async (incomingMessageContent, recipientPhone) => {
     // Create a new session ID using the Whatsapp phone number
