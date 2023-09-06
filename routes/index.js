@@ -19,17 +19,18 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
     try {
         // console.log('POST: Someone is pinging me!');
         let data = Whatsapp.parseMessage(req.body);
-        console.log('######################################')
-        console.log(JSON.stringify(data, undefined, 2))
-        console.log('######################################')
-        let incomingMessage = data.message;
-        let recipientPhone = incomingMessage.from.phone; // extract the phone number of sender
-        let recipientName = incomingMessage.from.name;
-        let typeOfMsg = incomingMessage.type; // extract the type of message (some are text, others are images, others are responses to buttons etc...)
-        let message_id = incomingMessage.message_id; // extract the message id
-
-
+        // console.log('######################################')
+        // console.log(JSON.stringify(data, undefined, 2))
+        // console.log('######################################')
+        
         if (data?.isMessage) {
+            let incomingMessage = data.message;
+            let recipientPhone = incomingMessage.from.phone; // extract the phone number of sender
+            let recipientName = incomingMessage.from.name;
+            let typeOfMsg = incomingMessage.type; // extract the type of message (some are text, others are images, others are responses to buttons etc...)
+            let message_id = incomingMessage.message_id; // extract the message id
+
+
             console.log(`The msg recieved is : ${JSON.stringify(incomingMessage, undefined, 2)}`)
             let chatTextt = incomingMessage.text.body
 
@@ -76,7 +77,7 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
             });
 
         } 
-        else if (!data?.isMessage) {
+        else if (data?.isMessage == false) {
             console.log(`*** is not isMessage debug ***`)
             console.log(JSON.stringify(data, undefined, 2))
         }
