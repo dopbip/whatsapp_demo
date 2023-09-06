@@ -69,6 +69,10 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
                     break;
              }
 
+             await Whatsapp.markMessageAsRead({
+                message_id,
+            });
+
         } else if (!data?.isMessage) {
             console.log(`*** is not isMessage debug ***`)
             console.log(JSON.stringify(data, undefined, 2))
