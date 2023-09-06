@@ -46,11 +46,28 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
              //Actions cases 
              switch (action) {
                 case 'input.unknown':
-                    
+                    await Whatsapp.sendSimpleButtons({
+                        message: `Hey ${recipientName},\nWellcome to *Valley lilies just4u*\nI am AI chatbot and am here to assist you! \nPlease choose from the following:`,
+                        recipientPhone: recipientPhone, 
+                        listOfButtons: [
+                            {
+                                title: '👙 Women',
+                                id: 'women_category',
+                            },
+                            {
+                                title: '🩲 Men',
+                                id: 'men_category',
+                            },
+                            // {
+                            //     title: 'Speak to a human',
+                            //     id: 'speak_to_human',
+                            // },
+                        ],
+                    });
                     break;
                 case 'input.welcome':
                     await Whatsapp.sendSimpleButtons({
-                                message: `Hey ${recipientName}, am AI chatbot and am here to assist you! \nPlease choose from the following:`,
+                        message: `Hey ${recipientName},\nWellcome to *Valley lilies just4u*\nI am AI chatbot and am here to assist you! \nPlease choose from the following:`,
                                 recipientPhone: recipientPhone, 
                                 listOfButtons: [
                                     {
