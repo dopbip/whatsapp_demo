@@ -46,9 +46,9 @@ let dialogflowRequest = async(msg)=>{
     } else{
         console.log('  No intent matched.');
     }
-    const { fulfillmentText } = result[0].queryResult;
-    const { action } = result[0].queryResult;
-    const { parameters } = result[0].queryResult
+    const { fulfillmentText } = result;
+    const { action } = result;
+    const { parameters } =result;
 
     return {
         "fulfillmentText": fulfillmentText,
