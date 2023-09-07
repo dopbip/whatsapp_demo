@@ -16,7 +16,7 @@ const config = {
   };
   //console.log(JSON.stringify(config, undefined, 2))
 
-let dialogflowRequest = async(incomingMessageContent)=>{
+let dialogflowRequest = async(msg)=>{
     // Create a session
     const sessionClient = new dialogflow.SessionsClient({keyFilename:"././panty-shop-agent-ecbs.json"})
     const sessionPath = sessionClient.projectAgentSessionPath(
@@ -28,8 +28,10 @@ let dialogflowRequest = async(incomingMessageContent)=>{
     const request = {
         session: sessionPath,
         queryInput: {
-            text: incomingMessageContent,
-            languageCode: 'en-US'
+            text: {
+                text: msg,
+                languageCode: 'en-US'
+            }
         }
     }
 

@@ -34,10 +34,10 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
 
 
             console.log(`The msg recieved is : ${JSON.stringify(incomingMessage, undefined, 2)}`)
-            let chatTextt = incomingMessage.text.body
+            let chatText = incomingMessage.text.body
 
              // Send the message to Dialogflow for processing
-             let dialogflowResponse = await dialogflowRequest(chatTextt)
+             let dialogflowResponse = await dialogflowRequest(chatText)
 
              // Extract the response from Dialogflow and send it back to Whatsapp
              let fulfillmentText = dialogflowResponse.fulfillmentText
