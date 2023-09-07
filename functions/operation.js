@@ -18,7 +18,7 @@ const config = {
 
 let dialogflowRequest = async(incomingMessageContent)=>{
     // Create a session
-    const sessionClient = new dialogflow.SessionsClient({keyFilename:"../panty-shop-agent-ecbs.json"})
+    const sessionClient = new dialogflow.SessionsClient({keyFilename:"././panty-shop-agent-ecbs.json"})
     const sessionPath = sessionClient.projectAgentSessionPath(
         projectId,
         sessionId
