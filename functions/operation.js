@@ -14,7 +14,7 @@ const config = {
       client_email: credentials.client_email
     }
   };
-  console.log(JSON.stringify(config, undefined, 2))
+  //console.log(JSON.stringify(config, undefined, 2))
 
 let dialogflowRequest = async(incomingMessageContent)=>{
     // Create a session

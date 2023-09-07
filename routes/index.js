@@ -7,7 +7,11 @@ const MetaConfig = {
     accessToken: 'EAACnqNygr3EBOyxkEBesm2XnX9egxmTqPgWGXnkBwkdI6ZC74nbefCBAh8W1HLeV3TyS813WrGD1yb8hZBgB6oGAW4Eu1tC1CVyPglrd8GkhCZCa2mp6siOqC2xrfU302KlrMXV2YxlWof6pU7aYs3cS0oymd7ZC2foPbhZA17rLxZB061GkeEWtwPGBIJ2ZBvFUnacixj74geWJJRYYSeTBjhKFaQZD',
     senderPhoneNumberId: '118618771205644',
     WABA_ID: '118416884561172',
+<<<<<<< HEAD
     graphAPIVersion: 'v17.0.',
+=======
+    graphAPIVersion: 'v17.0',
+>>>>>>> d1cf66745d38affd564577aceb4896263c77064f
     Meta_WA_VerifyToken:'happy_panda_in_space'
 };
 
@@ -19,15 +23,18 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
     try {
         // console.log('POST: Someone is pinging me!');
         let data = Whatsapp.parseMessage(req.body);
-        console.log(JSON.stringify(data, undefined, 2))
-        let incomingMessage = data.message;
-        let recipientPhone = incomingMessage.from.phone; // extract the phone number of sender
-        let recipientName = incomingMessage.from.name;
-        let typeOfMsg = incomingMessage.type; // extract the type of message (some are text, others are images, others are responses to buttons etc...)
-        let message_id = incomingMessage.message_id; // extract the message id
-
-
+        // console.log('######################################')
+        // console.log(JSON.stringify(data, undefined, 2))
+        // console.log('######################################')
+        
         if (data?.isMessage) {
+            let incomingMessage = data.message;
+            let recipientPhone = incomingMessage.from.phone; // extract the phone number of sender
+            let recipientName = incomingMessage.from.name;
+            let typeOfMsg = incomingMessage.type; // extract the type of message (some are text, others are images, others are responses to buttons etc...)
+            let message_id = incomingMessage.message_id; // extract the message id
+
+
             console.log(`The msg recieved is : ${JSON.stringify(incomingMessage, undefined, 2)}`)
             let chatTextt = incomingMessage.text.body
 
@@ -43,11 +50,28 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
              //Actions cases 
              switch (action) {
                 case 'input.unknown':
-                    
+                    await Whatsapp.sendSimpleButtons({
+                        message: `Hey ${recipientName},\nWellcome to *Valley lilies just4u*\nI am AI chatbot and am here to assist you! \nPlease choose from the following:`,
+                        recipientPhone: recipientPhone, 
+                        listOfButtons: [
+                            {
+                                title: '👙 Women',
+                                id: 'women_category',
+                            },
+                            {
+                                title: '🩲 Men',
+                                id: 'men_category',
+                            },
+                            // {
+                            //     title: 'Speak to a human',
+                            //     id: 'speak_to_human',
+                            // },
+                        ],
+                    });
                     break;
                 case 'input.welcome':
                     await Whatsapp.sendSimpleButtons({
-                                message: `Hey ${recipientName}, am AI chatbot and am here to assist you! \nPlease choose from the following:`,
+                        message: `Hey ${recipientName},\nWellcome to *Valley lilies just4u*\nI am AI chatbot and am here to assist you! \nPlease choose from the following:`,
                                 recipientPhone: recipientPhone, 
                                 listOfButtons: [
                                     {
@@ -69,7 +93,12 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
                     break;
              }
 
-        } else if (!data?.isMessage) {
+             await Whatsapp.markMessageAsRead({
+                message_id,
+            });
+
+        } 
+        else if (data?.isMessage == false) {
             console.log(`*** is not isMessage debug ***`)
             console.log(JSON.stringify(data, undefined, 2))
         }
