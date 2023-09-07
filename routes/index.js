@@ -4,7 +4,7 @@ const WhatsappCloudAPI = require('whatsappcloudapi_wrapper');
 const { dialogflowRequest } = require('../functions/operation')
 
 const MetaConfig = {
-    accessToken: 'EAACnqNygr3EBOyxkEBesm2XnX9egxmTqPgWGXnkBwkdI6ZC74nbefCBAh8W1HLeV3TyS813WrGD1yb8hZBgB6oGAW4Eu1tC1CVyPglrd8GkhCZCa2mp6siOqC2xrfU302KlrMXV2YxlWof6pU7aYs3cS0oymd7ZC2foPbhZA17rLxZB061GkeEWtwPGBIJ2ZBvFUnacixj74geWJJRYYSeTBjhKFaQZD',
+    accessToken: 'EAACnqNygr3EBOxvMglTmR6eqsldOdcywtm5FFFVq4fjcGo0O1DZCCyPLZBnPB1iZAQnE7748R6Lu03bof82li0ZA392UPHf8NGnqSJStaUiyB0NiIshOKfsb4ylsvzr7Dzab3ZC9RrKEIWbLLGwdZBJaE1HkPfRDpU6ilDZAtGDwgQlE0XqU5Vj8fTq9a5yGgA5zgPiydTVP50UBMZAumulw0U9CjFUZD',
     senderPhoneNumberId: '118618771205644',
     WABA_ID: '118416884561172',
 
