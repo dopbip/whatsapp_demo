@@ -138,39 +138,44 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
                             //let text = `*${serial_number}* \nColor:${availableColors}\nSize:${availableSizes}\n\n👉🏽 *Reply with* ${serial_number} color size_ *to order this item*`
                             let text = `*${serial_number}* \n${availableSizesAndColors}` //\n👉🏽 _*Reply with* ${serial_number} color size *to order this item*_
                             
-                            function function1(recipientPhone, imageUrl, text) {
-                                return new Promise((resolve, reject) => {
-                                    // Your code for function1 here
-                                    Whatsapp.sendImage({
-                                        recipientPhone: recipientPhone,
-                                        url: imageUrl,
-                                        caption: text,
-                                    });
-                                    console.log("Function 1 executed");
-                                    resolve();
-                                });
-                            }
+                            Whatsapp.sendImage({
+                                recipientPhone: recipientPhone,
+                                url: imageUrl,
+                                caption: text,
+                            });
+                            // function function1(recipientPhone, imageUrl, text) {
+                            //     return new Promise((resolve, reject) => {
+                            //         // Your code for function1 here
+                            //         Whatsapp.sendImage({
+                            //             recipientPhone: recipientPhone,
+                            //             url: imageUrl,
+                            //             caption: text,
+                            //         });
+                            //         console.log("Function 1 executed");
+                            //         resolve();
+                            //     });
+                            // }
                             
-                            function  function2(serial_number, recipientPhone) {
-                                // Your code for function2 here
-                                Whatsapp.sendSimpleButtons({
-                                    message: `🔖 ${serial_number}`,
-                                    recipientPhone: recipientPhone, 
-                                    listOfButtons: [
-                                        {
-                                            title: 'Select',
-                                            id: `braItemsId_${serial_number}`,
-                                        }                                
-                                    ],
-                                });
-                                console.log("Function 2 executed");
-                            }
+                            // function  function2(serial_number, recipientPhone) {
+                            //     // Your code for function2 here
+                            //     Whatsapp.sendSimpleButtons({
+                            //         message: `🔖 ${serial_number}`,
+                            //         recipientPhone: recipientPhone, 
+                            //         listOfButtons: [
+                            //             {
+                            //                 title: 'Select',
+                            //                 id: `braItemsId_${serial_number}`,
+                            //             }                                
+                            //         ],
+                            //     });
+                            //     console.log("Function 2 executed");
+                            // }
                             
-                            function1(recipientPhone, imageUrl, text)
-                                .then(() => function2(serial_number, recipientPhone))
-                                .catch(err => {
-                                    console.error(err);
-                                });
+                            // function1(recipientPhone, imageUrl, text)
+                            //     .then(() => function2(serial_number, recipientPhone))
+                            //     .catch(err => {
+                            //         console.error(err);
+                            //     });
                         })
                         break
                     default:
