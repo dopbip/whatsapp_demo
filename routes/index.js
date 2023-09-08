@@ -32,21 +32,19 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
             let typeOfMsg = incomingMessage.type; // extract the type of message (some are text, others are images, others are responses to buttons etc...)
             let message_id = incomingMessage.message_id; // extract the message id
 
+            if (typeOfMsg === 'text_message') {
+            let msg = incomingMessage.text.body;
 
-            console.log(`The msg recieved is : ${JSON.stringify(incomingMessage, undefined, 2)}`)
-            let chatText = incomingMessage.text.body
+            // Send the message to Dialogflow for processing
+            let dialogflowResponse = await dialogflowRequest(msg)
 
-             // Send the message to Dialogflow for processing
-             let dialogflowResponse = await dialogflowRequest(chatText)
-
-             // Extract the response from Dialogflow and send it back to Whatsapp
-             let fulfillmentText = dialogflowResponse.fulfillmentText
-             let action = dialogflowResponse.action
-             let parameters = dialogflowResponse.parameters
-             console.log(JSON.stringify(dialogflowResponse, undefined, 2))
-
-             //Actions cases 
-             switch (action) {
+            // Extract the response from Dialogflow and send it back to Whatsapp
+            let fulfillmentText = dialogflowResponse.fulfillmentText
+            let action = dialogflowResponse.action
+            let parameters = dialogflowResponse.parameters
+                console.log(JSON.stringify(dialogflowResponse, undefined, 2))
+            //Actions cases 
+            switch (action) {
                 case 'input.unknown':
                     await Whatsapp.sendSimpleButtons({
                         message: `Hey ${recipientName},\nWellcome to *Valley lilies just4u*\nI am AI chatbot and am here to assist you! \nPlease choose from the following:`,
@@ -60,10 +58,10 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
                                 title: '🩲 Men',
                                 id: 'men_category',
                             },
-                            // {
-                            //     title: 'Speak to a human',
-                            //     id: 'speak_to_human',
-                            // },
+                            {
+                                title: '🧸 Adult toys',
+                                id: 'adult_toys',
+                            },
                         ],
                     });
                     break;
@@ -80,16 +78,105 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
                                         title: '🩲 Men',
                                         id: 'men_category',
                                     },
-                                    // {
-                                    //     title: 'Speak to a human',
-                                    //     id: 'speak_to_human',
-                                    // },
+                                    {
+                                        title: '🧸 Adult toys',
+                                        id: 'adult_toys',
+                                    },
                                 ],
                             });
                     break;
                 default:
                     break;
-             }
+            }
+
+            }
+
+            if (typeOfMsg === 'simple_button_message') {
+                let button_id = incomingMessage.button_reply.id;
+                switch (button_id) {
+                    case 'women_category':
+                        await Whatsapp.sendSimpleButtons({
+                            message: `Please choose from the following:`,
+                            recipientPhone: recipientPhone, 
+                            listOfButtons: [
+                                {
+                                    title: '🛍️ Bra',
+                                    id: 'bra_items',
+                                },
+                                {
+                                    title: '🛍️ Panty',
+                                    id: 'panty_items',
+                                },
+                            ],
+                        });
+                        break;
+                    case 'bra_items':
+                        listOfItems = await Store.getItemsInCategory("bra_items");
+                        console.log(listOfItems)
+                        listOfItems.data.map( async(items) =>  {
+                            let availableSizesAndColors = ''
+                            let availableSizes = ''
+                            let imageUrl = items.imageUrl
+                            let serial_number = items.serial_number
+                            let colors = items.color
+                            let sizeData = items.size
+    
+                            colors.forEach(color => {
+                                // availableColors += ` - ${color}`
+                                let colorName = color
+    
+                                if (sizeData.hasOwnProperty(colorName)) {
+                                    const sizes = sizeData[colorName];
+                                    console.log(`Sizes for ${colorName}: ${sizes.join(", ")}`);
+                                    availableSizesAndColors += `Sizes for *${colorName}: ${sizes.join(", ")}*\n`
+                                  } else {
+                                    console.log(`Sizes for ${colorName} not found.`);
+                                  }
+                            });
+                            
+    
+                            //let text = `*${serial_number}* \nColor:${availableColors}\nSize:${availableSizes}\n\n👉🏽 *Reply with* ${serial_number} color size_ *to order this item*`
+                            let text = `*${serial_number}* \n${availableSizesAndColors}` //\n👉🏽 _*Reply with* ${serial_number} color size *to order this item*_
+                            
+                            function function1(recipientPhone, imageUrl, text) {
+                                return new Promise((resolve, reject) => {
+                                    // Your code for function1 here
+                                    Whatsapp.sendImage({
+                                        recipientPhone: recipientPhone,
+                                        url: imageUrl,
+                                        caption: text,
+                                    });
+                                    console.log("Function 1 executed");
+                                    resolve();
+                                });
+                            }
+                            
+                            function  function2(serial_number, recipientPhone) {
+                                // Your code for function2 here
+                                Whatsapp.sendSimpleButtons({
+                                    message: `🔖 ${serial_number}`,
+                                    recipientPhone: recipientPhone, 
+                                    listOfButtons: [
+                                        {
+                                            title: 'Select',
+                                            id: `braItemsId_${serial_number}`,
+                                        }                                
+                                    ],
+                                });
+                                console.log("Function 2 executed");
+                            }
+                            
+                            function1(recipientPhone, imageUrl, text)
+                                .then(() => function2(serial_number, recipientPhone))
+                                .catch(err => {
+                                    console.error(err);
+                                });
+                        })
+                        break
+                    default:
+                        break;
+                }
+            }
 
              await Whatsapp.markMessageAsRead({
                 message_id,
