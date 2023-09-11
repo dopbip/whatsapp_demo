@@ -113,7 +113,7 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
                         });
                         break;
                     case 'bra_items':
-                        listOfItems = await Store.getItemsInCategory("bra_items");
+                        let listOfItems = await Store.getItemsInCategory("bra_items");
                         console.log(listOfItems)
                         listOfItems.data.map( async(items) =>  {
                             let availableSizesAndColors = ''
