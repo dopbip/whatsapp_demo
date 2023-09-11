@@ -87,6 +87,13 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
                                 ],
                             });
                     break;
+                case 'women.item':
+                    await Whatsapp.sendText({
+                        message: `Yes, we do have `,
+                        recipientPhone: recipientPhone, 
+                    });
+
+                    break
                 default:
                     break;
             }
