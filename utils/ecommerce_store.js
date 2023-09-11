@@ -1,6 +1,6 @@
 'use strict';
 const request = require('request');
-const PDFDocument = require('pdfkit');
+//const PDFDocument = require('pdfkit');
 const fs = require('fs');
 
 module.exports = class EcommerceStore {
@@ -8,7 +8,7 @@ module.exports = class EcommerceStore {
     async _fetchAssistant(endpoint) {
         return new Promise((resolve, reject) => {
             request.get(
-                `https://panty-shop-api-5320c5a33289.herokuapp.com${endpoint ? endpoint : '/'}`,
+                `https://panty-shop-api-7e8bd79edf87.herokuapp.com${endpoint ? endpoint : '/'}`,
                 (error, res, body) => {
                     try {
                         if (error) {
@@ -30,7 +30,7 @@ module.exports = class EcommerceStore {
     async _postAssistant(endpoint, requestBody) { 
         return new Promise((resolve, reject) => {
             const options = {
-                url: `https://panty-shop-api-5320c5a33289.herokuapp.com${endpoint ? endpoint : '/'}`,
+                url: `https://panty-shop-api-7e8bd79edf87.herokuapp.com${endpoint ? endpoint : '/'}`,
                 method: 'POST',
                 json: true,
                 body: requestBody,
