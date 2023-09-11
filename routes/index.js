@@ -88,8 +88,9 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
                             });
                     break;
                 case 'women.item':
+                    let item = parameters.fields['women_item'].stringValue
                     await Whatsapp.sendText({
-                        message: `Yes, we do have `,
+                        message: `Yes, we do have ${item} in stock`,
                         recipientPhone: recipientPhone, 
                     });
 
