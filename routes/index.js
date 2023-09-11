@@ -2,6 +2,8 @@
 const router = require('express').Router();
 const WhatsappCloudAPI = require('whatsappcloudapi_wrapper');
 const { dialogflowRequest } = require('../functions/operation')
+const EcommerceStore = require('../utils/ecommerce_store.js');
+let Store = new EcommerceStore();
 
 const MetaConfig = {
     accessToken: 'EAACnqNygr3EBOwwhR98lDzZBUxbMJm1HTlnqdiYC2ZByOWTMDkNWNpaZBL4RdRPG3HuytGxq0U04boeTKlRkL3kG9fvG8ZAz3HGmkZCTrZAgIAiGMhlgTPs60zBRol9CrQrXpE33sYqmvJVI1cCpEAlF3ZAFxCttFgVusXVGkGQIaQJnwdewk0QkzZAqXAQFiZBsVY0syLkC1TKTiB0ZBTRepEGygaHLAZD',
