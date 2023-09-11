@@ -79,7 +79,7 @@ router.post('/meta_wa_callbackurl', async (req, res) => {
                                         id: 'men_category',
                                     },
                                     {
-                                        title: '🧸 Adult toys',
+                                        title: '🧸 toys',
                                         id: 'adult_toys',
                                     },
                                 ],
