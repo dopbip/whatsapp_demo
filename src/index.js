@@ -1,4 +1,4 @@
-const { createBot } = require('whatsapp-cloud-api');
+import { createBot } from 'whatsapp-cloud-api';
 const { dialogflowRequest } = require('../functions/operation')
 (async () => {
   try {
