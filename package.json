@@ -9,7 +9,7 @@
     "license": "MIT",
     "scripts": {
         "dev": "nodemon index.js",
-        "start": "node index.js",
+        "start": "node ./src/index.js",
         "prettier": "prettier --ignore-path .prettierignore --config prettier.config.js --write ."
     },
     "dependencies": {
