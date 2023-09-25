@@ -1,5 +1,5 @@
 require('dotenv').config();
-const credentials = require('../panty-shop-agent-ecbs.json');
+const credentials = require('./panty-shop-agent-ecbs.json');
 const dialogflow = require('@google-cloud/dialogflow');
 const uuid = require('uuid');
 
